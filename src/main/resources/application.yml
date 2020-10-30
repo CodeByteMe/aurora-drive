@@ -18,3 +18,26 @@ spring:
       settings:
         trace: true
         web-allow-others: true
+  security:
+    basic:
+      enabled: true
+      path: /swagger-ui.html
+    user:
+      name: admin
+      password: 666666
+# JWT配置
+jwt:
+  # 密匙KEY
+  secret: JWTSecret@123456SpringBoot
+  # HeaderKEY
+  tokenHeader: Authorization
+  # Token前缀字符
+  tokenPrefix: Aurora-
+  # 过期时间 单位秒 1天后过期=86400 7天后过期=604800
+  expiration: 86400
+  # accessToken超时时间 单位秒
+  access-token: 3600
+  # 刷新token时间 单位秒
+  refresh-token: 3600
+  # 配置不需要认证的接口
+  antMatchers: /user/login,/api-docs,/swagger-**,/favicon**
