@@ -25,6 +25,11 @@ spring:
     user:
       name: admin
       password: 666666
+# 日志输出配置
+logging:
+  file:
+    max-size: 10MB
+    path: log
 # JWT配置
 jwt:
   # 密匙KEY
