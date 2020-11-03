@@ -2,9 +2,10 @@ package com.bess.auroradrive.util;
 
 import com.bess.auroradrive.config.JWTConfig;
 import com.bess.auroradrive.model.entity.User;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import lombok.extern.slf4j.Slf4j;
 
 import java.util.Date;
 
@@ -14,7 +15,6 @@ import java.util.Date;
  * @Author BessCroft
  * @Date 2020/10/30 10:13
  */
-@Slf4j
 public class JWTUtil {
 
     /**
@@ -39,4 +39,14 @@ public class JWTUtil {
                 .compact();
         return token;
     }
+
+    /**
+     * 解码Token
+     * @param token
+     * @return
+     */
+    public static Jws<Claims> Decrypt(String token) {
+        return Jwts.parser().setSigningKey(JWTConfig.secret).parseClaimsJws(token);
+    }
+
 }

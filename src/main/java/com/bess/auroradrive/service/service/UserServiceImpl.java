@@ -1,6 +1,7 @@
 package com.bess.auroradrive.service.service;
 
 import com.bess.auroradrive.mapper.SystemConfigMapper;
+import com.bess.auroradrive.model.dto.UserInfo;
 import com.bess.auroradrive.model.entity.SystemConfig;
 import com.bess.auroradrive.service.UserService;
 import com.bess.auroradrive.util.MD5Util;
@@ -32,6 +33,15 @@ public class UserServiceImpl implements UserService {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public UserInfo getInfo() {
+        SystemConfig systemConfig1 = systemConfigMapper.selectById(3);
+        String nickName = systemConfig1.getValue();
+        SystemConfig systemConfig2 = systemConfigMapper.selectById(5);
+        String avatarUrl = systemConfig2.getValue();
+        return new UserInfo(nickName,avatarUrl);
     }
 
 }

@@ -1,5 +1,7 @@
 package com.bess.auroradrive.service;
 
+import com.bess.auroradrive.model.dto.UserInfo;
+
 /**
  * UserService
  *
@@ -15,4 +17,10 @@ public interface UserService {
      * @return
      */
     public boolean login(String username,String password);
+
+    /**
+     * 查询用户信息
+     * @return
+     */
+    public UserInfo getInfo();
 }
