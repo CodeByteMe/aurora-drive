@@ -1,7 +1,6 @@
 package com.bess.auroradrive.controller;
 
 import com.bess.auroradrive.config.JWTConfig;
-import com.bess.auroradrive.mapper.SystemConfigMapper;
 import com.bess.auroradrive.model.dto.UserInfo;
 import com.bess.auroradrive.model.entity.User;
 import com.bess.auroradrive.model.vo.ResultVO;
@@ -17,7 +16,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -33,9 +31,6 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping("/user")
 @Api(tags = "用户信息接口")
 public class UserController {
-
-    @Resource
-    private SystemConfigMapper systemConfigMapper;
 
     @Resource
     private UserService userService;
@@ -68,6 +63,51 @@ public class UserController {
             info = userService.getInfo();
             if (info != null) {
                 return new ResultVO(0,"success",info);
+            }
+        } catch (Exception e) {
+            log.error("Info接口异常:" + e);
+        }
+        return new ResultVO(1,"fail",null);
+    }
+
+    @PostMapping("/updateInfo")
+    @ApiOperation(value = "用户信息修改接口" , notes = "修改用户信息的接口")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "nickName", value = "用户昵称", required = true, type = "String"),
+            @ApiImplicitParam(name = "avatarUrl", value = "用户头像地址", required = true, type = "String"),
+            @ApiImplicitParam(name = "token", value = "token验证信息", required = true, type = "String")
+    })
+    public ResultVO updateInfo(String nickName,String avatarUrl,HttpServletRequest request) {
+        String token = request.getHeader(JWTConfig.tokenHeader);
+        log.info("用户请求了updateInfo接口,nickName为:" + nickName + ",avatarUrl为:" + avatarUrl);
+        try {
+            Jws<Claims> decrypt = JWTUtil.Decrypt(token);
+            boolean b = userService.updateInfo(nickName, avatarUrl);
+            if (b) {
+                return new ResultVO(0,"success",new UserInfo(nickName, avatarUrl));
+            }
+        } catch (Exception e) {
+            log.error("Info接口异常:" + e);
+        }
+        return new ResultVO(1,"fail",null);
+    }
+
+    @PostMapping("/updateUser")
+    @ApiOperation(value = "用户密码修改接口" , notes = "修改用户密码的接口")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "lowPassWord", value = "旧密码", required = true, type = "String"),
+            @ApiImplicitParam(name = "newPassWord", value = "新密码", required = true, type = "String"),
+            @ApiImplicitParam(name = "confirmPassWord", value = "确认密码", required = true, type = "String"),
+            @ApiImplicitParam(name = "token", value = "token验证信息", required = true, type = "String")
+    })
+    public ResultVO updateUser(String lowPassWord,String newPassWord,String confirmPassWord,HttpServletRequest request) {
+        String token = request.getHeader(JWTConfig.tokenHeader);
+        log.info("用户请求了updateUser接口,lowPassWord为:" + lowPassWord + ",newPassWord为:" + newPassWord + ",confirmPassWord为:" + confirmPassWord);
+        try {
+            Jws<Claims> decrypt = JWTUtil.Decrypt(token);
+            boolean b = userService.updateUser(lowPassWord, newPassWord, confirmPassWord);
+            if (b) {
+                return new ResultVO(0,"success", null);
             }
         } catch (Exception e) {
             log.error("Info接口异常:" + e);
