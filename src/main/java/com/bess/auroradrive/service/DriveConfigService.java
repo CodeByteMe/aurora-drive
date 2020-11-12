@@ -26,7 +26,7 @@ public interface DriveConfigService
      * @param driveConfig driveConfig
      * @return driveConfig集合
      */
-    public List<DriveConfig> selectDriveConfigList(DriveConfig driveConfig);
+    public List<DriveConfig> selectDriveConfigList();
 
     /**
      * 新增driveConfig
@@ -34,7 +34,7 @@ public interface DriveConfigService
      * @param driveConfig driveConfig
      * @return 结果
      */
-    public int insertDriveConfig(DriveConfig driveConfig);
+    public boolean insertDriveConfig(DriveConfig driveConfig);
 
     /**
      * 修改driveConfig
@@ -42,7 +42,7 @@ public interface DriveConfigService
      * @param driveConfig driveConfig
      * @return 结果
      */
-    public int updateDriveConfig(DriveConfig driveConfig);
+    public boolean updateDriveConfig(DriveConfig driveConfig);
 
     /**
      * 删除driveConfig信息
@@ -50,5 +50,14 @@ public interface DriveConfigService
      * @param configId driveConfigID
      * @return 结果
      */
-    public int deleteDriveConfigById(Long configId);
+    public boolean deleteDriveConfigById(Long configId);
+
+    /**
+     * 更新cacheEnable
+     *
+     * @param configId
+     * @param cacheEnable
+     * @return
+     */
+    public boolean updateCacheEnable(Long configId, boolean cacheEnable);
 }

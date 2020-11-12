@@ -1,6 +1,7 @@
 package com.bess.auroradrive.mapper;
 
 import com.bess.auroradrive.model.domain.DriveConfig;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -22,11 +23,10 @@ public interface DriveConfigMapper
 
     /**
      * 查询driveConfig列表
-     * 
-     * @param driveConfig driveConfig
+     *
      * @return driveConfig集合
      */
-    public List<DriveConfig> selectDriveConfigList(DriveConfig driveConfig);
+    public List<DriveConfig> selectDriveConfigList();
 
     /**
      * 新增driveConfig
@@ -51,5 +51,15 @@ public interface DriveConfigMapper
      * @return 结果
      */
     public int deleteDriveConfigById(Long configId);
+
+    /**
+     * 更新缓存状态
+     *
+     * @param configId
+     * @param cacheEnable
+     * @return
+     */
+    public int updateCacheEnable(@Param("configId") Long configId,
+                                 @Param("cacheEnable") boolean cacheEnable);
 
 }

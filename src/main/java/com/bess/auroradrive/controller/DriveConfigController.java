@@ -11,6 +11,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.io.Serializable;
+import java.util.List;
 
 /**
  * driveConfigController
@@ -23,7 +25,7 @@ import javax.annotation.Resource;
 @RestController
 @RequestMapping("/drive")
 @Api(tags = "驱动器信息接口")
-public class DriveConfigController {
+public class DriveConfigController implements Serializable {
 
     @Resource
     private DriveConfigService driveConfigService;
@@ -31,8 +33,8 @@ public class DriveConfigController {
     @GetMapping("/list")
     @ApiOperation(value = "驱动器列表接口" , notes = "查询driveConfig列表")
     public ResultVO list() {
-        log.info("用户请求了list接口");
-        return new ResultVO(0,"success",null);
+        List<DriveConfig> driveConfigs = driveConfigService.selectDriveConfigList();
+        return new ResultVO(0,"success",driveConfigs);
     }
 
     @GetMapping(value = "/getInfo/{configId}")
@@ -42,35 +44,56 @@ public class DriveConfigController {
             @ApiImplicitParam(name = "token", value = "token验证信息", required = true, type = "String")
     })
     public ResultVO getInfo(@PathVariable("configId") Long configId) {
-        log.info("用户请求了getInfo接口");
-        return new ResultVO(0,"success",null);
+        DriveConfig driveConfig = driveConfigService.selectDriveConfigById(configId);
+        return new ResultVO(0,"success",driveConfig);
     }
 
     @PostMapping(value = "/create")
     @ApiOperation(value = "新增driveConfig接口" , notes = "新增驱动器配置信息")
     @ApiImplicitParam(name = "driveConfig", value = "驱动器实例", required = true, type = "DriveConfig")
     public ResultVO add(@RequestBody DriveConfig driveConfig) {
-        log.info("用户请求了add接口");
-        return new ResultVO(0,"success",null);
+        boolean b = driveConfigService.insertDriveConfig(driveConfig);
+        if (b) {
+            return new ResultVO(0,"success",null);
+        } else {
+            return new ResultVO(1,"fail",null);
+        }
     }
 
     @PutMapping(value = "/update")
     @ApiOperation(value = "修改driveConfig接口" , notes = "修改驱动器配置信息")
     @ApiImplicitParam(name = "driveConfig", value = "驱动器实例", required = true, type = "DriveConfig")
     public ResultVO update(@RequestBody DriveConfig driveConfig) {
-        log.info("用户请求了update接口");
-        return new ResultVO(0,"success",null);
+        boolean b = driveConfigService.updateDriveConfig(driveConfig);
+        if (b) {
+            return new ResultVO(0,"success",null);
+        } else {
+            return new ResultVO(1,"fail",null);
+        }
     }
 
-    /**
-     * 删除driveConfig
-     */
 	@DeleteMapping("/delete/{configId}")
     @ApiOperation(value = "删除driveConfig接口" , notes = "删除驱动器配置")
     @ApiImplicitParam(name = "configId", value = "驱动器id", required = true, type = "Long")
     public ResultVO remove(@PathVariable Long configId) {
-        log.info("用户请求了remove接口");
-        return new ResultVO(0,"success",null);
+        boolean b = driveConfigService.deleteDriveConfigById(configId);
+        if (b) {
+            return new ResultVO(0,"success",null);
+        } else {
+            return new ResultVO(1,"fail",null);
+        }
+    }
+
+    @PutMapping(value = "/update/cache/{configId}/{cacheEnable}")
+    @ApiOperation(value = "修改driveConfig接口" , notes = "修改驱动器配置信息")
+    @ApiImplicitParam(name = "driveConfig", value = "驱动器实例", required = true, type = "DriveConfig")
+    public ResultVO updateCache(@PathVariable Long configId, @PathVariable Boolean cacheEnable) {
+        boolean b = driveConfigService.updateCacheEnable(configId, cacheEnable);
+        if (b) {
+            return new ResultVO(0,"success",null);
+        } else {
+            return new ResultVO(1,"fail",null);
+        }
     }
 
 }

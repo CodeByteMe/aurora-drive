@@ -46,7 +46,6 @@ public class JWTAuthenticationTokenFilter implements Filter {
             || uri.contains("favicon") || uri.contains("/doc.html") || uri.contains("/webjars/**")) {
             filterChain.doFilter(request,response);
         } else if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
-            log.info("预检请求");
             response.setStatus(200);
             return;
         } else {
@@ -56,7 +55,6 @@ public class JWTAuthenticationTokenFilter implements Filter {
                 try {
                     // 截取JWT前缀
                     String token = tokenHeader.replace(JWTConfig.tokenPrefix, "");
-                    log.info("Token为：" + token);
                     // 解析JWT
                     Claims claims = Jwts.parser()
                             .setSigningKey(JWTConfig.secret)

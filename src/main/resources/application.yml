@@ -8,7 +8,7 @@ spring:
     driver-class-name: org.h2.Driver
     schema: classpath:db/aurora.sql
     data: classpath:db/aurora-data.sql
-    url: jdbc:h2:mem:aurora
+    url: jdbc:h2:mem:aurora;MODE=MySQL
     username: root
     password: 666666
   h2:
@@ -40,8 +40,8 @@ knife4j:
 
 # JWT配置
 jwt:
-  # 密匙KEY
-  secret: JWTSecret@123456SpringBoot
+  # 必须使用最少88位的Base64对该令牌进行编码
+  base64-secret: Vm0xd1IxbFhTWGhYV0d4WFlrZG9WVll3YUVOV1ZteHpXa2M1VldKR2NIaFZiWFF3VkRGYWRHVkdhRnBXVjFKSVdWWmFSMVpWTVVWaGVqQTk=
   # HeaderKEY
   tokenHeader: Authorization
   # Token前缀字符

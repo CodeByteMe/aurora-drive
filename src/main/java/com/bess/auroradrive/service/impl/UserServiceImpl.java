@@ -26,6 +26,7 @@ public class UserServiceImpl implements UserService {
     private SystemConfigMapper systemConfigMapper;
 
     @Override
+    @Transactional(isolation = Isolation.REPEATABLE_READ, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public boolean login(String username, String password) {
         SystemConfig systemConfig1 = systemConfigMapper.selectById(1);
         String userName = systemConfig1.getValue();
@@ -39,6 +40,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public UserInfo getInfo() {
         SystemConfig systemConfig1 = systemConfigMapper.selectById(3);
         String nickName = systemConfig1.getValue();
