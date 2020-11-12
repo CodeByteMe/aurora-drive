@@ -1,7 +1,7 @@
 package com.bess.auroradrive.util;
 
 import com.bess.auroradrive.config.JWTConfig;
-import com.bess.auroradrive.model.entity.User;
+import com.bess.auroradrive.model.domain.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
@@ -37,7 +37,7 @@ public class JWTUtil {
                 // 签名算法和密钥
                 .signWith(SignatureAlgorithm.HS256, JWTConfig.secret)
                 .compact();
-        return token;
+        return JWTConfig.tokenPrefix + token;
     }
 
     /**

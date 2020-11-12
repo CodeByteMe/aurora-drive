@@ -1,4 +1,4 @@
-package com.bess.auroradrive.model.entity;
+package com.bess.auroradrive.model.domain;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

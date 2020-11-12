@@ -1,7 +1,7 @@
 package com.bess.auroradrive.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.bess.auroradrive.model.entity.SystemConfig;
+import com.bess.auroradrive.model.domain.SystemConfig;
 
 /**
  * SystemConfigMapper
