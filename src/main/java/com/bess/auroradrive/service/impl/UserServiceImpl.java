@@ -2,7 +2,7 @@ package com.bess.auroradrive.service.impl;
 
 import com.bess.auroradrive.mapper.SystemConfigMapper;
 import com.bess.auroradrive.model.dto.UserInfo;
-import com.bess.auroradrive.model.entity.SystemConfig;
+import com.bess.auroradrive.model.domain.SystemConfig;
 import com.bess.auroradrive.service.UserService;
 import com.bess.auroradrive.util.MD5Util;
 import lombok.extern.slf4j.Slf4j;

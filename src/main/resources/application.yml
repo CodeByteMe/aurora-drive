@@ -21,15 +21,23 @@ spring:
   security:
     basic:
       enabled: true
-      path: /swagger-ui.html
+      path: /doc.html
     user:
       name: admin
       password: 666666
+
 # 日志输出配置
 logging:
   file:
     max-size: 10MB
     path: log
+
+knife4j:
+  basic:
+    enable: false
+    username: zhangsan
+    password: 123456
+
 # JWT配置
 jwt:
   # 密匙KEY
