@@ -42,7 +42,6 @@ public class UserController {
             @ApiImplicitParam(name = "password", value = "密码", required = true, type = "String")
     })
     public ResultVO Login(String username,String password) {
-        log.info("用户名:" + username + ",密码:" + password);
         boolean login = userService.login(username, password);
         if (login) {
             String token = JWTUtil.createAccessToken(new User(username, null, null,1));
@@ -54,7 +53,6 @@ public class UserController {
     @GetMapping("/info")
     @ApiOperation(value = "用户信息查询接口" , notes = "管理员登录成功后查询信息的接口")
     public ResultVO Info() {
-        log.info("用户请求了Info接口");
         UserInfo info = userService.getInfo();
         if (info != null) {
             return new ResultVO(0,"success",info);
@@ -70,7 +68,6 @@ public class UserController {
             @ApiImplicitParam(name = "avatarUrl", value = "用户头像地址", required = true, type = "String")
     })
     public ResultVO updateInfo(String nickName,String avatarUrl) {
-        log.info("用户请求了updateInfo接口,nickName为:" + nickName + ",avatarUrl为:" + avatarUrl);
         boolean b = userService.updateInfo(nickName, avatarUrl);
         if (b) {
             return new ResultVO(0,"success",new UserInfo(nickName, avatarUrl));
@@ -87,7 +84,6 @@ public class UserController {
             @ApiImplicitParam(name = "confirmPassWord", value = "确认密码", required = true, type = "String")
     })
     public ResultVO updateUser(String lowPassWord,String newPassWord,String confirmPassWord) {
-        log.info("用户请求了updateUser接口,lowPassWord为:" + lowPassWord + ",newPassWord为:" + newPassWord + ",confirmPassWord为:" + confirmPassWord);
         boolean b = userService.updateUser(lowPassWord, newPassWord, confirmPassWord);
         if (b) {
             return new ResultVO(0,"success", null);

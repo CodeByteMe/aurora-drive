@@ -48,7 +48,7 @@ public class JWTConfig {
      */
     public static String antMatchers;
 
-    @Value("${jwt.secret}")
+    @Value("${jwt.base64-secret}")
     public void setSecret(String secret) {
         JWTConfig.secret = secret;
     }

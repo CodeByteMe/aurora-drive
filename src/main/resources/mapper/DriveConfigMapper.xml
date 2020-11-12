@@ -41,27 +41,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
         
     <insert id="insertDriveConfig" parameterType="com.bess.auroradrive.model.domain.DriveConfig" useGeneratedKeys="true" keyProperty="configId">
-        insert into drive_config
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="driveName != null and driveName != ''">drive_name,</if>
-            <if test="driveType != null and driveType != ''">drive_type,</if>
-            <if test="cacheEnable != null">cache_enable,</if>
-            <if test="cloudName != null and cloudName != ''">cloud_name,</if>
-            <if test="cloudAccount != null and cloudAccount != ''">cloud_account,</if>
-            <if test="cloudPwd != null and cloudPwd != ''">cloud_pwd,</if>
-            <if test="acceleratedDomainName != null and acceleratedDomainName != ''">accelerated_domain_name,</if>
-            <if test="rootPath != null and rootPath != ''">root_path,</if>
-         </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="driveName != null and driveName != ''">#{driveName},</if>
-            <if test="driveType != null and driveType != ''">#{driveType},</if>
-            <if test="cacheEnable != null">#{cacheEnable},</if>
-            <if test="cloudName != null and cloudName != ''">#{cloudName},</if>
-            <if test="cloudAccount != null and cloudAccount != ''">#{cloudAccount},</if>
-            <if test="cloudPwd != null and cloudPwd != ''">#{cloudPwd},</if>
-            <if test="acceleratedDomainName != null and acceleratedDomainName != ''">#{acceleratedDomainName},</if>
-            <if test="rootPath != null and rootPath != ''">#{rootPath},</if>
-         </trim>
+        INSERT INTO drive_config(drive_name, drive_type, cache_enable, cloud_name, cloud_account, cloud_pwd, accelerated_domain_name, root_path)
+        VALUES(#{driveName}, #{driveType}, #{cacheEnable}, #{cloudName}, #{cloudAccount}, #{cloudPwd}, #{acceleratedDomainName}, #{rootPath});
     </insert>
 
     <update id="updateDriveConfig" parameterType="com.bess.auroradrive.model.domain.DriveConfig">
@@ -82,5 +63,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <delete id="deleteDriveConfigById" parameterType="Long">
         delete from drive_config where config_id = #{configId}
     </delete>
-    
+
+    <update id="updateCacheEnable">
+        update drive_config set cache_enable = #{cacheEnable}
+        where config_id = #{configId}
+    </update>
 </mapper>
