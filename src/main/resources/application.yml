@@ -53,4 +53,4 @@ jwt:
   # 刷新token时间 单位秒
   refresh-token: 3600
   # 配置不需要认证的接口
-  antMatchers: /user/login,/api-docs,/swagger-**,/favicon**
+  antMatchers: /user/login,/v2/api-docs,/swagger-**,/favicon**,/doc.html

@@ -5,9 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import lombok.Data;
-import cn.hutool.core.bean.BeanUtil;
 import io.swagger.annotations.ApiModelProperty;
-import cn.hutool.core.bean.copier.CopyOptions;
 import java.io.Serializable;
 
 /**

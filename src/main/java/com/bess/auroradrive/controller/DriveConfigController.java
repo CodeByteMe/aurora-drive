@@ -85,8 +85,11 @@ public class DriveConfigController implements Serializable {
     }
 
     @PutMapping(value = "/update/cache/{configId}/{cacheEnable}")
-    @ApiOperation(value = "修改driveConfig接口" , notes = "修改驱动器配置信息")
-    @ApiImplicitParam(name = "driveConfig", value = "驱动器实例", required = true, type = "DriveConfig")
+    @ApiOperation(value = "修改cacheEnable接口" , notes = "修改驱动器缓存状态")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "configId", value = "驱动器id", required = true, type = "Long"),
+            @ApiImplicitParam(name = "cacheEnable", value = "缓存开启状态", required = true, type = "Boolean")
+    })
     public ResultVO updateCache(@PathVariable Long configId, @PathVariable Boolean cacheEnable) {
         boolean b = driveConfigService.updateCacheEnable(configId, cacheEnable);
         if (b) {
