@@ -10,6 +10,10 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * 过滤器，主要用于处理预检请求和校验Token的正确性
@@ -21,6 +25,7 @@ import java.io.IOException;
 @Component
 @WebFilter("/*")
 public class JWTAuthenticationTokenFilter implements Filter {
+
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
 
@@ -34,21 +39,20 @@ public class JWTAuthenticationTokenFilter implements Filter {
         request.setCharacterEncoding("utf-8");
         response.setContentType("text/html;charset=utf-8");
 
-        response.setHeader("Access-Control-Allow-Origin","*");      //设置允许跨域
-        response.setHeader("Access-Control-Allow-Methods","*");     //设置允许多种请求方式
-        response.setHeader("Access-Control-Max-Age","3600");        //设置跨域缓存的最大时间
-        response.setHeader("Access-Control-Allow-Headers","*");     //设置允许携带header
-        response.setHeader("Access-Control-Allow-Credentials","*"); //设置允许携带cookie
+        // 设置允许跨域
+        response.setHeader("Access-Control-Allow-Origin","*");
+        // 设置允许多种请求方式
+        response.setHeader("Access-Control-Allow-Methods","*");
+        // 设置跨域缓存的最大时间
+        response.setHeader("Access-Control-Max-Age","3600");
+        // 设置允许携带header
+        response.setHeader("Access-Control-Allow-Headers","*");
+        // 设置允许携带cookie
+        response.setHeader("Access-Control-Allow-Credentials","*");
 
         String uri = request.getRequestURI();
 
-        if (uri.contains("swagger-")|| uri.contains("api-docs") || uri.contains("/user/login")
-            || uri.contains("favicon") || uri.contains("/doc.html") || uri.contains("/webjars/**")) {
-            filterChain.doFilter(request,response);
-        } else if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
-            response.setStatus(200);
-            return;
-        } else {
+        if (uri.endsWith("/user/") || uri.endsWith("/drive/")) {
             String tokenHeader = request.getHeader(JWTConfig.tokenHeader);
             log.info(tokenHeader);
             if (null != tokenHeader && tokenHeader.startsWith((JWTConfig.tokenPrefix))) {
@@ -78,6 +82,12 @@ public class JWTAuthenticationTokenFilter implements Filter {
                     return;
                 }
             }
+        } else if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
+            response.setStatus(200);
+            filterChain.doFilter(request,response);
+            return;
+        } else {
+            filterChain.doFilter(request,response);
         }
     }
 

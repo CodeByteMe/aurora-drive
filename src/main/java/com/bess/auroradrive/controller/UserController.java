@@ -1,13 +1,10 @@
 package com.bess.auroradrive.controller;
 
-import com.bess.auroradrive.config.JWTConfig;
 import com.bess.auroradrive.model.dto.UserInfo;
 import com.bess.auroradrive.model.domain.User;
 import com.bess.auroradrive.model.vo.ResultVO;
 import com.bess.auroradrive.service.UserService;
 import com.bess.auroradrive.util.JWTUtil;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jws;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -16,7 +13,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * UserController
