@@ -4,7 +4,11 @@
 
 ### 简介
 
-aurora-drive 算是我写的第一个“正式的”开源项目了。准备当成个人网盘来用，也希望能有一定程度的文件操作功能。准备采用容器化的方式部署，为前后端分离项目。
+aurora-drive 准备当成个人网盘来用，也希望能有一定程度的文件操作功能。准备采用容器化的方式部署，为前后端分离项目。**目前还在开发中，不能部署上线！**
+
+### TODO
+
+最近比较忙，准备先做项目需求和文档。。。
 
 ## 技术选型
 
@@ -33,6 +37,8 @@ aurora-drive 算是我写的第一个“正式的”开源项目了。准备当�
 | Vue      | 前端框架              | https://vuejs.org/             |
 | Element  | 前端UI框架            | https://element.eleme.io/      |
 | Axios    | 前端HTTP框架          | https://github.com/axios/axios |
+| ECharts           | 一个使用 JavaScript 实现的开源可视化库 | https://echarts.apache.org/zh/index.html                |
+| vue-element-admin | A magical vue admin                    | https://panjiachen.github.io/vue-element-admin-site/zh/ |
 
 ### 第三方SDK
 
@@ -50,7 +56,9 @@ aurora-drive 算是我写的第一个“正式的”开源项目了。准备当�
 | ------------- | ------- | ------------------------------------------------------------ |
 | JDK           | 1.8     | https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html |
 | H2            | 1.4.200 | https://h2database.com/html/main.html                        |
-| idea         | 2020.2   | https://www.jetbrains.com/idea/     |
+| idea         | 2020.2.3   | https://www.jetbrains.com/idea/     |
+| nodejs   | 14.15.0  | https://nodejs.org/zh-cn/             |
+| WebStorm | 2020.2.3 | https://www.jetbrains.com/webstorm/   |
 
 ### 在线开发
 
@@ -61,11 +69,33 @@ aurora-drive 算是我写的第一个“正式的”开源项目了。准备当�
 或者克隆到本地开发:
 
 ```
-$ git clone https://github.com/besscroft/aurora-drive
+$ git clone https://github.com/besscroft/aurora-drive.git
 ```
-#### 前端项目
+### 项目构建
 
-[aurora-drive-web](https://github.com/besscroft/aurora-drive-web)
+其实我更推荐[yarn](https://github.com/yarnpkg/yarn)
+
+```bash
+# 克隆项目
+git clone https://github.com/besscroft/aurora-drive.git
+
+# 进入项目目录
+cd aurora-drive/aurora-web
+
+# 安装依赖
+npm install
+
+# 建议不要用 cnpm 安装 会有各种诡异的bug 可以通过如下操作解决 npm 下载速度慢的问题
+npm install --registry=https://registry.npm.taobao.org
+
+# 本地开发 启动项目
+npm run dev
+```
+
+#### 本项目的参考的项目（致谢）
+
+[vue-element-admin](https://github.com/PanJiaChen/vue-element-admin)
+[eladmin](https://github.com/elunez/eladmin)
 
 #### 联系我
 

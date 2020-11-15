@@ -1,8 +1,21 @@
 HELP.md
 target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
 .idea
 .mvn
 *.iml
 mvnw
 mvnw.cmd
 log/
+.DS_Store
+# 前端的gitignore
+**/.DS_Store
+**/node_modules/
+**/dist/
+**/npm-debug.log*
+**/yarn-debug.log*
+**/yarn-error.log*
+**/package-lock.json
+**/tests/**/coverage/
