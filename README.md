@@ -69,7 +69,7 @@ aurora-drive 准备当成个人网盘来用，也希望能有一定程度的文�
 或者克隆到本地开发:
 
 ```
-$ git clone https://github.com/besscroft/aurora-drive
+$ git clone https://github.com/besscroft/aurora-drive.git
 ```
 ### 项目构建
 
@@ -77,10 +77,10 @@ $ git clone https://github.com/besscroft/aurora-drive
 
 ```bash
 # 克隆项目
-git clone https://github.com/besscroft/aurora-drive-web.git
+git clone https://github.com/besscroft/aurora-drive.git
 
 # 进入项目目录
-cd aurora-drive-web
+cd aurora-drive/aurora-web
 
 # 安装依赖
 npm install
